@@ -3,6 +3,7 @@ package com.example.restwebservice.serviceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,8 +44,17 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User saveUser(User user) {
+        int userId = list.size();
+        user.setUserID(++userId);
         list.add(user);
         log.debug("User has been successfully saved.");
         return user;
+    }
+
+    @Override
+    public void deleteUserById(int id) {
+
+        Predicate<? super User> predicate = user -> user.getUserID() == id;
+        list.removeIf(predicate);
     }
 }
