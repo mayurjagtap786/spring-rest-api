@@ -1,0 +1,46 @@
+pipeline{
+    agent any
+    environment{
+        MAVEN_HOME = "/mnt/h/Tools/apache-maven-3.9.9/bin/mvn"
+    }
+    stages{
+        stage("Code Clone"){
+            steps{
+                echo "Code Cloning"
+                git url: "https://github.com/mayurjagtap786/spring-rest-api.git" , branch: "master"
+            }
+        }
+        stage("Build and Test") {
+            steps{
+                echo "Building the image"
+                sh "mvn clean test"
+               
+            }
+        }
+         stage("Package Application") {
+            steps{
+                echo "Building the image"
+                sh "mvn package"
+            }
+        }
+          stage("Build Docker Image") {
+            steps{
+                echo "Building Docker image"
+                sh "docker build -t rest-webserver:latest ."
+            }
+        }
+        stage("Push To DockerHub") {
+            steps{
+                echo "Pushing the image to docker hub"
+            }
+        }
+    }
+    post{
+        success{
+            echo "Pipeline successfully executed"
+        }
+        failure{
+            echo "Pipeline failed, Check log"
+        }
+    }
+}
