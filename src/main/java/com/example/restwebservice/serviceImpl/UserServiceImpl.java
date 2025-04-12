@@ -27,6 +27,7 @@ public class UserServiceImpl implements IUserService {
 		list.add(new User(++count, "Charmi", "", "Chandane", "charmi.chandane@gmail.com", "9845621478"));
 		list.add(new User(++count, "Bhagyashree", "", "Samant", "bhagyashree.samant@gmail.com", "7845123658"));
         list.add(new User(++count, "Gaurav", "", "Samant", "gaurav.samant@gmail.com", "98457895214"));
+        list.add(new User(++count, "Sakshi", "", "Samant", "sakshi.samant@gmail.com", "54897897878"));
 
 	}
 
